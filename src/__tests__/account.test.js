@@ -3,7 +3,7 @@
 
 import { type EdgeAccount, type EdgeContext, type EdgeFakeWorld, addEdgeCorePlugins, lockEdgeCorePlugins, makeFakeEdgeWorld } from 'edge-core-js'
 import accountbased from 'edge-currency-accountbased'
-import bitcoin from 'edge-currency-bitcoin'
+import bitcoin from 'edge-currency-plugins'
 import monero from 'edge-currency-monero'
 import exchange from 'edge-exchange-plugins'
 
