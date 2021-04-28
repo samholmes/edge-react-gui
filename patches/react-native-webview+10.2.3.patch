@@ -1,3 +1,16 @@
+diff --git a/node_modules/react-native-webview/android/build.gradle b/node_modules/react-native-webview/android/build.gradle
+index e6d0508..d6d2b24 100644
+--- a/node_modules/react-native-webview/android/build.gradle
++++ b/node_modules/react-native-webview/android/build.gradle
+@@ -38,7 +38,7 @@ android {
+   compileSdkVersion getExtOrIntegerDefault('compileSdkVersion')
+   buildToolsVersion getExtOrDefault('buildToolsVersion')
+   defaultConfig {
+-    minSdkVersion 16
++    minSdkVersion 21
+     targetSdkVersion getExtOrIntegerDefault('targetSdkVersion')
+     versionCode 1
+     versionName "1.0"
 diff --git a/node_modules/react-native-webview/android/src/main/java/com/reactnativecommunity/webview/RNCWebViewManager.java b/node_modules/react-native-webview/android/src/main/java/com/reactnativecommunity/webview/RNCWebViewManager.java
 index 0a57f4f..0df0214 100644
 --- a/node_modules/react-native-webview/android/src/main/java/com/reactnativecommunity/webview/RNCWebViewManager.java
@@ -11,12 +24,12 @@ index 0a57f4f..0df0214 100644
        event.putString("url", url);
        event.putBoolean("canGoBack", webView.canGoBack());
 diff --git a/node_modules/react-native-webview/android/src/main/java/com/reactnativecommunity/webview/RNCWebViewModule.java b/node_modules/react-native-webview/android/src/main/java/com/reactnativecommunity/webview/RNCWebViewModule.java
-index 5b5ffe2..622ea0a 100644
+index 5b5ffe2..3e5e39a 100644
 --- a/node_modules/react-native-webview/android/src/main/java/com/reactnativecommunity/webview/RNCWebViewModule.java
 +++ b/node_modules/react-native-webview/android/src/main/java/com/reactnativecommunity/webview/RNCWebViewModule.java
 @@ -272,11 +272,6 @@ public class RNCWebViewModule extends ReactContextBaseJavaModule implements Acti
    }
-
+ 
    public boolean grantFileDownloaderPermissions() {
 -    // Permission not required for Android Q and above
 -    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {

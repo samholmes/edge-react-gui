@@ -1,0 +1,13 @@
+diff --git a/node_modules/react-native-extra-dimensions-android/android/build.gradle b/node_modules/react-native-extra-dimensions-android/android/build.gradle
+index c470e07..29a4e7b 100644
+--- a/node_modules/react-native-extra-dimensions-android/android/build.gradle
++++ b/node_modules/react-native-extra-dimensions-android/android/build.gradle
+@@ -14,7 +14,7 @@ android {
+     buildToolsVersion rootProject.hasProperty('buildToolsVersion') ? rootProject.buildToolsVersion : DEFAULT_BUILD_TOOLS_VERSION
+ 
+     defaultConfig {
+-        minSdkVersion 16
++        minSdkVersion 21
+         targetSdkVersion rootProject.hasProperty('targetSdkVersion') ? rootProject.targetSdkVersion : DEFAULT_TARGET_SDK_VERSION
+         versionCode 1
+         versionName "1.0"

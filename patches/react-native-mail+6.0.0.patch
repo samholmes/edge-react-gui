@@ -1,0 +1,13 @@
+diff --git a/node_modules/react-native-mail/android/build.gradle b/node_modules/react-native-mail/android/build.gradle
+index a988449..7ca2b5a 100644
+--- a/node_modules/react-native-mail/android/build.gradle
++++ b/node_modules/react-native-mail/android/build.gradle
+@@ -5,7 +5,7 @@ android {
+     buildToolsVersion project.hasProperty('buildToolsVersion') ? project.buildToolsVersion : "23.0.1"
+ 
+     defaultConfig {
+-        minSdkVersion 16
++        minSdkVersion 21
+         targetSdkVersion project.hasProperty('targetSdkVersion') ? project.targetSdkVersion : 22
+         versionCode 1
+         versionName "1.0"
