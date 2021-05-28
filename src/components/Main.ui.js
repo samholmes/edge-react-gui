@@ -20,6 +20,7 @@ import { CryptoExchangeScene } from '../components/scenes/CryptoExchangeScene.js
 import { CryptoExchangeSuccessScene } from '../components/scenes/CryptoExchangeSuccessScene.js'
 import { CurrencySettingsScene } from '../components/scenes/CurrencySettingsScene.js'
 import { DefaultFiatSettingScene } from '../components/scenes/DefaultFiatSettingScene.js'
+import { EdgeLoginScene } from '../components/scenes/EdgeLoginScene.js'
 import { FioAddressDetailsScene } from '../components/scenes/FioAddressDetailsScene'
 import { FioAddressListScene } from '../components/scenes/FioAddressListScene'
 import { FioAddressRegisteredScene } from '../components/scenes/FioAddressRegisteredScene'
@@ -42,7 +43,6 @@ import ExchangeDropMenu from '../connectors/components/HeaderMenuExchangeConnect
 import RequestDropMenu from '../connectors/components/HeaderMenuRequestConnector'
 import { CreateWalletAccountSelectConnector } from '../connectors/scenes/CreateWalletAccountSelectConnector.js'
 import { CreateWalletAccountSetupConnector } from '../connectors/scenes/CreateWalletAccountSetupConnector.js'
-import EdgeLoginSceneConnector from '../connectors/scenes/EdgeLoginSceneConnector'
 import SpendingLimitsConnector from '../connectors/SpendingLimitsConnector.js'
 import * as Constants from '../constants/indexConstants'
 import s from '../locales/strings.js'
@@ -140,7 +140,7 @@ export class MainComponent extends React.Component<Props> {
             <Scene
               key={Constants.EDGE_LOGIN}
               navTransparent
-              component={ifLoggedIn(EdgeLoginSceneConnector)}
+              component={ifLoggedIn(EdgeLoginScene)}
               renderTitle={<HeaderTitle title={s.strings.title_edge_login} />}
               renderLeftButton={<BackButton onPress={this.handleBack} />}
               renderRightButton={<HeaderTextButton type="help" placement="right" />}
