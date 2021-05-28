@@ -9,6 +9,7 @@ import ENV from '../../env.json'
 import { checkEnabledExchanges } from '../actions/CryptoExchangeActions.js'
 import { checkAndShowGetCryptoModal } from '../actions/ScanActions.js'
 import { showReEnableOtpModal } from '../actions/SettingsActions.js'
+import { AddTokenScene } from '../components/scenes/AddTokenScene.js'
 import { CreateWalletChoiceComponent } from '../components/scenes/CreateWalletChoiceScene.js'
 import { CreateWalletImportScene } from '../components/scenes/CreateWalletImportScene.js'
 import { CreateWalletReviewScene } from '../components/scenes/CreateWalletReviewScene.js'
@@ -39,7 +40,6 @@ import { WalletListScene } from '../components/scenes/WalletListScene.js'
 import { requestPermission } from '../components/services/PermissionsManager.js'
 import ExchangeDropMenu from '../connectors/components/HeaderMenuExchangeConnector'
 import RequestDropMenu from '../connectors/components/HeaderMenuRequestConnector'
-import AddToken from '../connectors/scenes/AddTokenConnector.js'
 import { CreateWalletAccountSelectConnector } from '../connectors/scenes/CreateWalletAccountSelectConnector.js'
 import { CreateWalletAccountSetupConnector } from '../connectors/scenes/CreateWalletAccountSetupConnector.js'
 import EdgeLoginSceneConnector from '../connectors/scenes/EdgeLoginSceneConnector'
@@ -308,7 +308,7 @@ export class MainComponent extends React.Component<Props> {
               />
               <Scene
                 key={Constants.ADD_TOKEN}
-                component={ifLoggedIn(AddToken)}
+                component={ifLoggedIn(AddTokenScene)}
                 navTransparent
                 onLeft={Actions.pop}
                 renderLeftButton={<BackButton onPress={this.handleBack} />}
@@ -456,7 +456,7 @@ export class MainComponent extends React.Component<Props> {
             <Scene
               key={Constants.ADD_TOKEN}
               navTransparent
-              component={ifLoggedIn(AddToken)}
+              component={ifLoggedIn(AddTokenScene)}
               renderTitle={<HeaderTitle title={s.strings.title_add_token} />}
               renderLeftButton={<BackButton onPress={this.handleBack} />}
               renderRightButton={this.renderEmptyButton()}

@@ -3,19 +3,22 @@
 import _ from 'lodash'
 import * as React from 'react'
 import { ActivityIndicator, Alert, ScrollView, StyleSheet, View } from 'react-native'
+import { connect } from 'react-redux'
 
+import { addNewToken } from '../../actions/AddTokenActions.js'
 import { MAX_TOKEN_CODE_CHARACTERS } from '../../constants/indexConstants.js'
 import s from '../../locales/strings.js'
 import { PrimaryButton } from '../../modules/UI/components/Buttons/PrimaryButton.ui.js'
 import Text from '../../modules/UI/components/FormattedText/FormattedText.ui.js'
 import { THEME } from '../../theme/variables/airbitz.js'
+import { type Dispatch, type RootState } from '../../types/reduxTypes.js'
 import type { CustomTokenInfo, GuiWallet } from '../../types/types.js'
 import { scale } from '../../util/scaling.js'
 import { decimalPlacesToDenomination } from '../../util/utils.js'
 import { FormField } from '../common/FormField.js'
 import { SceneWrapper } from '../common/SceneWrapper.js'
 
-export type AddTokenOwnProps = {
+type OwnProps = {
   walletId: string,
   addTokenPending: Function,
   addNewToken: Function,
@@ -29,14 +32,16 @@ export type AddTokenOwnProps = {
   decimalPlaces: string
 }
 
-export type AddTokenDispatchProps = {
+type DispatchProps = {
   addNewToken: (walletId: string, currencyName: string, currencyCode: string, contractAddress: string, denomination: string, type: string) => void
 }
 
-export type AddTokenStateProps = {
+type StateProps = {
   addTokenPending: boolean,
   wallet: GuiWallet
 }
+
+type Props = OwnProps & StateProps & DispatchProps
 
 type State = {
   currencyName: string,
@@ -47,10 +52,8 @@ type State = {
   enabled?: boolean
 }
 
-type AddTokenProps = AddTokenOwnProps & AddTokenStateProps & AddTokenDispatchProps
-
-export class AddToken extends React.Component<AddTokenProps, State> {
-  constructor(props: AddTokenProps) {
+class AddTokenComponent extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props)
     const { currencyName, currencyCode, contractAddress, decimalPlaces } = props
     this.state = {
@@ -223,3 +226,15 @@ const rawStyles = {
   }
 }
 const styles: typeof rawStyles = StyleSheet.create(rawStyles)
+
+export const AddTokenScene = connect(
+  (state: RootState, ownProps: OwnProps): StateProps => ({
+    addTokenPending: state.ui.wallets.addTokenPending,
+    wallet: state.ui.wallets.byId[ownProps.walletId]
+  }),
+  (dispatch: Dispatch): DispatchProps => ({
+    addNewToken(walletId: string, currencyName: string, currencyCode: string, contractAddress: string, denomination: string, walletType: string) {
+      dispatch(addNewToken(walletId, currencyName, currencyCode, contractAddress, denomination, walletType))
+    }
+  })
+)(AddTokenComponent)
