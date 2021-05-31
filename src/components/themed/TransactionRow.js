@@ -85,7 +85,7 @@ class TransactionRowComponent extends React.PureComponent<Props> {
       pendingText = sprintf(s.strings.fragment_transaction_list_confirmation_progress, currentConfirmations, requiredConfirmations)
       pendingStyle = styles.partialTime
     } else {
-      pendingText = transaction.time
+      pendingText = transaction.time.split(':', 2).join(':') // Don't show seconds
       pendingStyle = styles.completedTime
     }
 
