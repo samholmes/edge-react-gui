@@ -11,7 +11,6 @@ import IonIcon from 'react-native-vector-icons/Ionicons'
 import { connect } from 'react-redux'
 
 import {
-  lockSettings,
   setAutoLogoutTimeInSecondsRequest,
   setDeveloperModeOn,
   showRestoreWalletsModal,
@@ -317,7 +316,10 @@ export const SettingsScene = connect(
       dispatch(updateTouchIdEnabled(arg, account))
     },
     lockSettings() {
-      dispatch(lockSettings())
+      dispatch({
+        type: 'UI/SETTINGS/SET_SETTINGS_LOCK',
+        data: true
+      })
     },
     onTogglePinLoginEnabled(enableLogin: boolean) {
       dispatch(togglePinLoginEnabled(enableLogin))
