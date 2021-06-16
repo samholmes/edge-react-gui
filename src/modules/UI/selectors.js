@@ -1,13 +1,12 @@
 // @flow
 
-import type { EdgeCurrencyInfo, EdgeCurrencyWallet, EdgeDenomination } from 'edge-core-js'
+import { type EdgeCurrencyWallet, type EdgeDenomination } from 'edge-core-js'
 import _ from 'lodash'
 
 import { formatNumber } from '../../locales/intl.js'
 import { type RootState } from '../../types/reduxTypes.js'
 import type { GuiDenomination, GuiWallet } from '../../types/types.js'
 import { convertNativeToExchange, getCurrencyInfo } from '../../util/utils.js'
-import * as SETTINGS_SELECTORS from '../Settings/selectors'
 
 export function getSelectedWallet(state: RootState): GuiWallet {
   return state.ui.wallets.byId[state.ui.wallets.selectedWalletId]
@@ -42,8 +41,7 @@ export const getActiveWalletCurrencyInfos = (state: RootState) => {
 }
 
 export const getDefaultDenomination = (state: RootState, currencyCode: string): EdgeDenomination => {
-  const plugins: Object = SETTINGS_SELECTORS.getPlugins(state)
-  const allCurrencyInfos: EdgeCurrencyInfo[] = plugins.allCurrencyInfos
+  const { allCurrencyInfos } = state.ui.settings.plugins
   const currencyInfo = getCurrencyInfo(allCurrencyInfos, currencyCode)
   if (currencyInfo) return currencyInfo[0]
   const settings = state.ui.settings
@@ -55,7 +53,7 @@ export const getDefaultDenomination = (state: RootState, currencyCode: string): 
 }
 
 export const getExchangeDenomination = (state: RootState, currencyCode: string, specificWallet?: GuiWallet): GuiDenomination => {
-  const customTokens = SETTINGS_SELECTORS.getCustomTokens(state)
+  const { customTokens } = state.ui.settings
   const walletId = specificWallet ? specificWallet.id : state.ui.wallets.selectedWalletId
   const wallet = state.ui.wallets.byId[walletId]
   if (wallet.allDenominations[currencyCode]) {

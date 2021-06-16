@@ -7,7 +7,6 @@ import { connect } from 'react-redux'
 import { toggleAccountBalanceVisibility } from '../../actions/WalletListActions.js'
 import { formatNumber } from '../../locales/intl.js'
 import s from '../../locales/strings.js'
-import { getDefaultIsoFiat, getIsAccountBalanceVisible } from '../../modules/Settings/selectors.js'
 import { type RootState } from '../../types/reduxTypes.js'
 import { type GuiExchangeRates } from '../../types/types.js'
 import { getFiatSymbol, getTotalFiatAmountFromExchangeRates } from '../../util/utils.js'
@@ -83,9 +82,9 @@ const getStyles = cacheStyles((theme: Theme) => ({
 
 export const WiredBalanceBox = connect(
   (state: RootState): StateProps => {
-    const isoFiatCurrencyCode = getDefaultIsoFiat(state)
+    const isoFiatCurrencyCode = state.ui.settings.defaultIsoFiat
     return {
-      showBalance: getIsAccountBalanceVisible(state),
+      showBalance: state.ui.settings.isAccountBalanceVisible,
       fiatAmount: getTotalFiatAmountFromExchangeRates(state, isoFiatCurrencyCode),
       isoFiatCurrencyCode,
       exchangeRates: state.exchangeRates
