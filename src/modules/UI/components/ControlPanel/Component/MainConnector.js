@@ -2,9 +2,9 @@
 
 import { connect } from 'react-redux'
 
+import { logoutRequest } from '../../../../../actions/LoginActions.js'
 import { selectWalletFromModal } from '../../../../../actions/WalletActions.js'
 import { type Dispatch, type RootState } from '../../../../../types/reduxTypes.js'
-import { logoutRequest } from '../../../../Login/action'
 import Main from './Main'
 
 const mapStateToProps = (state: RootState) => ({
