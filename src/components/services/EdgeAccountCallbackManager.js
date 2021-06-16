@@ -6,9 +6,9 @@ import * as React from 'react'
 import { Actions } from 'react-native-router-flux'
 import { connect } from 'react-redux'
 
+import { updateExchangeRates } from '../../actions/ExchangeRateActions.js'
 import { SECURITY_ALERTS_SCENE } from '../../constants/SceneKeys.js'
 import { updateWalletsRequest } from '../../modules/Core/Wallets/action.js'
-import { updateExchangeRates } from '../../modules/ExchangeRates/action.js'
 import { type Dispatch, type RootState } from '../../types/reduxTypes.js'
 import { Airship } from './AirshipInstance.js'
 
