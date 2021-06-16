@@ -4,7 +4,7 @@ import * as React from 'react'
 import { type AirshipBridge } from 'react-native-airship'
 import { connect } from 'react-redux'
 
-import { submitLogs } from '../../actions/SettingsActions'
+import { submitLogs } from '../../actions/LogActions.js'
 import s from '../../locales/strings.js'
 import type { Dispatch } from '../../types/reduxTypes'
 import { type RootState } from '../../types/reduxTypes'
