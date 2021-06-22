@@ -12,12 +12,12 @@ import { type GuiExchangeRates } from '../../types/types.js'
 import { getFiatSymbol, getTotalFiatAmountFromExchangeRates } from '../../util/utils.js'
 import { type Theme, type ThemeProps, cacheStyles, withTheme } from '../services/ThemeContext.js'
 import { EdgeText } from './EdgeText.js'
-import { SceneHeader } from './SceneHeader'
+import { SceneHeader } from './SceneHeader.js'
 
 type StateProps = {
   showBalance: boolean,
   fiatAmount: number,
-  isoFiatCurrencyCode: string,
+  defaultIsoFiat: string,
   exchangeRates: GuiExchangeRates
 }
 
@@ -29,9 +29,9 @@ type Props = StateProps & DispatchProps & ThemeProps
 
 class BalanceBox extends React.PureComponent<Props> {
   render() {
-    const { isoFiatCurrencyCode, fiatAmount, showBalance, exchangeRates, theme } = this.props
-    const fiatSymbol = isoFiatCurrencyCode ? getFiatSymbol(isoFiatCurrencyCode) : ''
-    const fiatCurrencyCode = isoFiatCurrencyCode.replace('iso:', '')
+    const { defaultIsoFiat, fiatAmount, showBalance, exchangeRates, theme } = this.props
+    const fiatSymbol = defaultIsoFiat ? getFiatSymbol(defaultIsoFiat) : ''
+    const fiatCurrencyCode = defaultIsoFiat.replace('iso:', '')
     const formattedFiat = formatNumber(fiatAmount, { toFixed: 2 })
     const styles = getStyles(theme)
 
@@ -82,11 +82,11 @@ const getStyles = cacheStyles((theme: Theme) => ({
 
 export const WiredBalanceBox = connect(
   (state: RootState): StateProps => {
-    const isoFiatCurrencyCode = state.ui.settings.defaultIsoFiat
+    const { defaultIsoFiat } = state.ui.settings
     return {
       showBalance: state.ui.settings.isAccountBalanceVisible,
-      fiatAmount: getTotalFiatAmountFromExchangeRates(state, isoFiatCurrencyCode),
-      isoFiatCurrencyCode,
+      fiatAmount: getTotalFiatAmountFromExchangeRates(state, defaultIsoFiat),
+      defaultIsoFiat,
       exchangeRates: state.exchangeRates
     }
   },
